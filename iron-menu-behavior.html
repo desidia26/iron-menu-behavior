@@ -35,6 +35,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       /**
+       * Attribute used to determine if an item will be auto-focused on
+       * when the user focuses on the menu
+       */
+       noFocus: {
+          type: Boolean,
+          value: false
+       },
+
+      /**
        * The attribute to use on menu items to look up the item title. Typing the first
        * letter of an item when the menu is open focuses that item. If unset, `textContent`
        * will be used.
@@ -299,7 +308,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // menu element's local DOM and is focusable.
       var rootTarget = /** @type {?HTMLElement} */(
           Polymer.dom(event).rootTarget);
-      if (rootTarget !== this && typeof rootTarget.tabIndex !== "undefined" && !this.isLightDescendant(rootTarget)) {
+      if (this.noFocus || rootTarget !== this && typeof rootTarget.tabIndex !== "undefined" && !this.isLightDescendant(rootTarget)) {
         return;
       }
 
